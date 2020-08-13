@@ -14,7 +14,7 @@ import { AuthContext } from '../contexts/AuthContext';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setToken, setIsAuth } = useContext(AuthContext)
+  const { loginUser } = useContext(AuthContext)
 
   const handleSubmit = async (event)=>{
     event.preventDefault();
@@ -23,13 +23,10 @@ const Login = () => {
       password
     };
     const LOGIN_URL = `http://localhost:8080/api/v1/login/`
-
+    
     try {
       const res = await axios.post(LOGIN_URL, jsonSend)
-      console.log(res)
-      localStorage.setItem('app_tokken', res.data.token)
-      setToken (res.data.token)
-      setIsAuth (true)
+      loginUser(res.data.token)  
       alert ('Succesful Login')      
     } catch (error) {
       alert('Error in Login')

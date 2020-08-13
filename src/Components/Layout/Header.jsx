@@ -27,10 +27,10 @@ const Header = (props) => {
           <>
            <NavItem>
             <NavLink >
-              <Link to="/login">Ir a inicio</Link>
+              <Link to="/">Ir a inicio</Link>
             </NavLink>          
             <NavLink>
-            <Link to="/register">Logout</Link>
+            <Link to="/logout">Logout</Link>
             </NavLink>
           </NavItem>
           </>
