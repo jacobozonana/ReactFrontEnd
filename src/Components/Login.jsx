@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Header from './Layout/Header'
 import {
@@ -8,11 +8,14 @@ import {
   Label,  
   Input,
 } from 'reactstrap';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { setToken, setIsAuth } = useContext(AuthContext)
+
   const handleSubmit = async (event)=>{
     event.preventDefault();
     const jsonSend ={
@@ -25,6 +28,8 @@ const Login = () => {
       const res = await axios.post(LOGIN_URL, jsonSend)
       console.log(res)
       localStorage.setItem('app_tokken', res.data.token)
+      setToken (res.data.token)
+      setIsAuth (true)
       alert ('Succesful Login')      
     } catch (error) {
       alert('Error in Login')
